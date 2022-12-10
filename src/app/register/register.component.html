@@ -1,1 +1,30 @@
-<p>register works!</p>
+<div class="wrapper">
+    <div class="form-container">
+        <h1 class="register-heading">Create an account</h1>
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" [(ngModel)]="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="name" class="form-control" id="name" [(ngModel)]="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="address" class="form-control" id="address" [(ngModel)]="address" name="address">
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone number</label>
+                <input type="phoneNumber" mask="000-000-000" class="form-control" id="phoneNumber" [(ngModel)]="phoneNumber" name="phoneNumber">
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+    
