@@ -1,0 +1,10 @@
+.nav {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    background: #eee;
+}
+
+.nav-btn {
+    width: 200px;
+}
