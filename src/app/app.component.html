@@ -1,10 +1,16 @@
 <div class="nav">
-    <button class="nav-btn">Dogs</button>
-    <button class="nav-btn">Cats</button>
-    <button class="nav-btn">Fish</button>
-    <button class="nav-btn">Birds</button>
-    <button class="nav-btn" routerLink="register">Register</button>
-    <button class="nav-btn" routerLink="login">Login</button>
+    <div class="left-nav">
+        <button class="nav-btn">Dogs</button>
+        <button class="nav-btn">Cats</button>
+        <button class="nav-btn">Fish</button>
+        <button class="nav-btn">Birds</button>
+    </div>
+    <div class="right-nav">
+        <button class="nav-btn" routerLink="cart">Cart</button>
+        <button *ngIf="!isAuthenticated" class="nav-btn" routerLink="register">Register</button>
+        <button *ngIf="!isAuthenticated"  class="nav-btn" routerLink="login">Login</button>
+        <button *ngIf="isAuthenticated"  class="nav-btn" (click)="logout()">Logout</button>
+    </div>
 </div>
-<router-outlet></router-outlet>
+<router-outlet (activate)="onEvent($event)"></router-outlet>
 

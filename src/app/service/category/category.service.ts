@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/model/category';
-import { HttpClientHelper } from '../base-url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  private baseUrl: string = `${HttpClientHelper.baseUrl}/category`;
+  private baseUrl: string = '/category';
 
   constructor(private http: HttpClient) { }
 

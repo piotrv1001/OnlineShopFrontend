@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
-import { HttpClientHelper } from '../base-url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private baseUrl: string = `${HttpClientHelper.baseUrl}/user`;
+  private baseUrl: string = '/user';
 
   constructor(private http: HttpClient) { }
 
@@ -22,14 +21,18 @@ export class UserService {
   }
 
   register(registerRequest: User): Observable<any> {
-    return this.http.post<User>(`${HttpClientHelper.baseUrl}/register`, registerRequest);
+    return this.http.post<User>('/register', registerRequest);
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${HttpClientHelper.baseUrl}/login?email=${email}&password=${password}`, null);
+    return this.http.post<any>(`/login?email=${email}&password=${password}`, null);
   }
 
   logout(): Observable<any> {
-    return this.http.post<any>(`${HttpClientHelper.baseUrl}/logout`, null);
+    return this.http.get<any>('/logout');
+  }
+
+  authenticate(): Observable<any> {
+    return this.http.get('/authenticate');
   }
 }

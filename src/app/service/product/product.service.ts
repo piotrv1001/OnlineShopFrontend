@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/model/product';
-import { HttpClientHelper } from '../base-url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private baseUrl: string = `${HttpClientHelper.baseUrl}/product`;
+  private baseUrl: string = '/product';
 
   constructor(private http: HttpClient) { }
 
