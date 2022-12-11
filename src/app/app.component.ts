@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from './service/shared-service';
 import { UserService } from './service/user/user.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService) {}
+    private userService: UserService,
+    private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.authenticate();
@@ -27,6 +29,14 @@ export class AppComponent implements OnInit {
     });
   }
 
+  onCategorySelected(categoryId: number): void {
+    if(this.router.url !== '/products') {
+      this.router.navigate(['products'], {state: {categoryId: categoryId}});
+    } else {
+      this.sharedService.emitChange(categoryId);
+    }
+  }
+
   logout(): void {
     this.userService.logout().subscribe(
       {complete: () => {
@@ -37,11 +47,13 @@ export class AppComponent implements OnInit {
   }
 
   onEvent(elementRef: any): void {
-    elementRef.notifyAboutAuth.subscribe((event: boolean) => {
-      if(event) {
-        this.authenticate();
-      }
-    })
+    if(elementRef !== undefined && elementRef.notifyAboutAuth !== undefined) {
+      elementRef.notifyAboutAuth.subscribe((event: boolean) => {
+        if(event) {
+          this.authenticate();
+        }
+      });
+    }
   }
   
 }

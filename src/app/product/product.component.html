@@ -1,1 +1,7 @@
-<p>product works!</p>
+<div class="product-parent">
+    <div *ngFor="let product of products" class="product-card">
+        <h1 style="color: black">{{product.name}}</h1>
+        <h2>{{product.price}} $</h2>
+        <button class="add-to-cart-btn">Add to cart</button>
+    </div>
+</div>

@@ -1,9 +1,9 @@
 <div class="nav">
     <div class="left-nav">
-        <button class="nav-btn">Dogs</button>
-        <button class="nav-btn">Cats</button>
-        <button class="nav-btn">Fish</button>
-        <button class="nav-btn">Birds</button>
+        <button class="nav-btn" (click)="onCategorySelected(1)">Dogs</button>
+        <button class="nav-btn" (click)="onCategorySelected(2)">Cats</button>
+        <button class="nav-btn" (click)="onCategorySelected(3)">Fish</button>
+        <button class="nav-btn" (click)="onCategorySelected(4)">Birds</button>
     </div>
     <div class="right-nav">
         <button class="nav-btn" routerLink="cart">Cart</button>
