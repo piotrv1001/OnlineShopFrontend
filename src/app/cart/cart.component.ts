@@ -43,4 +43,12 @@ export class CartComponent implements OnInit {
     }
   }
 
+  removeOrderItem(orderItemId: number): void {
+    this.orderItemService.deleteOrderItemById(orderItemId).subscribe(
+      {next: () => {
+        this.loadOrderItems();
+      }}
+    )
+  }
+
 }

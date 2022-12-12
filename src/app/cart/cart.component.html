@@ -1,6 +1,14 @@
-<div class="cart-item-container">
-    <div *ngFor="let product of products; index as i" class="product-card">
-        <h1 style="color: black">{{product.name}}</h1>
-        <h2>{{product.price}} $</h2>
+<div class="wrapper">
+    <div class="cart-item-container">
+        <div *ngFor="let product of products; index as i" class="product-card">
+            <div class="card-row">
+                <div>
+                    <h1 style="color: black">{{product.name}}</h1>
+                    <h2>{{product.price}} $</h2>
+                </div>
+                <button class="delete-order-item-btn" (click)="removeOrderItem(orderItems[i].orderItemId!)">Remove</button>
+            </div>
+        </div>
     </div>
+    
 </div>
