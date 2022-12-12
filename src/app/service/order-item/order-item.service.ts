@@ -12,12 +12,12 @@ export class OrderItemService {
 
   constructor(private http: HttpClient) { }
 
-  getOrderItemsByOrderId(orderId: number): Observable<OrderItem[]> {
-    return this.http.get<OrderItem[]>(`${this.baseUrl}/orderId=${orderId}`);
+  getOrderItemsByUserId(userId: number): Observable<OrderItem[]> {
+    return this.http.get<OrderItem[]>(`${this.baseUrl}?userId=${userId}`);
   }
 
-  addOrderItemToOrder(orderId: number, productId: number): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/orderId=${orderId}&productId=${productId}`, null);
+  addOrderItemToOrder(userId: number, productId: number): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}?userId=${userId}&productId=${productId}`, null);
   }
 
   deleteOrderItemById(orderItemId: number): Observable<any> {
@@ -25,6 +25,6 @@ export class OrderItemService {
   }
 
   updateOrderItemAmount(orderItemId: number, amount: number): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/orderItemId=${orderItemId}&amount=${amount}`, null);
+    return this.http.put<any>(`${this.baseUrl}?orderItemId=${orderItemId}&amount=${amount}`, null);
   }
 }

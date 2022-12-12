@@ -16,6 +16,10 @@ export class ProductService {
     return this.http.get<Product[]>(this.baseUrl);
   }
 
+  getProductsByOrderItems(orderItemIds: number[]): Observable<Product[]> {
+    return this.http.post<Product[]>(`${this.baseUrl}/order-item`, {'order-item-ids': orderItemIds});
+  }
+
   getProductsByCategoryId(categoryId: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.baseUrl}?categoryId=${categoryId}`);
   }

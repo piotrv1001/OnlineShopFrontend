@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../service/user/user.service';
 
 @Component({
@@ -15,16 +16,20 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService) { }
+    private userService: UserService,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
     this.userService.login(this.email, this.password).subscribe(
-      {complete: () => {
+      {next: (userId: string) => {
+        if(!this.cookieService.get('userId')) {
+          this.cookieService.set('userId', userId);
+        }
         this.notifyAboutAuth.emit(true);
-        this.router.navigate(['']);
+          this.router.navigate(['']);
       }}
     )
   }

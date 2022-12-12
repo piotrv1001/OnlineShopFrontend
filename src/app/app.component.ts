@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from './service/shared-service';
 import { UserService } from './service/user/user.service';
 
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private sharedService: SharedService) {}
+    private sharedService: SharedService,
+    private cookieService: CookieService) {}
 
   ngOnInit(): void {
     this.authenticate();
@@ -42,6 +44,7 @@ export class AppComponent implements OnInit {
       {complete: () => {
         this.router.navigate(['login']);
         this.isAuthenticated = false;
+        this.cookieService.delete('userId');
       }}
     )
   }

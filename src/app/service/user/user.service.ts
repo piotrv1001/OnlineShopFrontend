@@ -24,8 +24,8 @@ export class UserService {
     return this.http.post<User>('/register', registerRequest);
   }
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`/login?email=${email}&password=${password}`, null);
+  login(email: string, password: string): Observable<string> {
+    return this.http.post<string>(`/login?email=${email}&password=${password}`, null);
   }
 
   logout(): Observable<any> {

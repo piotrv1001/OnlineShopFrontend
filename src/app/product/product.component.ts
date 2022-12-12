@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Product } from '../model/product';
+import { OrderItemService } from '../service/order-item/order-item.service';
 import { ProductService } from '../service/product/product.service';
 import { SharedService } from '../service/shared-service';
 
@@ -16,7 +18,9 @@ export class ProductComponent implements OnInit {
   constructor(
     private router: Router,
     private productService: ProductService,
-    private sharedService: SharedService) {
+    private sharedService: SharedService,
+    private orderItemService: OrderItemService,
+    private cookieService: CookieService) {
       const navigation = this.router.getCurrentNavigation();
       const state = navigation?.extras.state as {
         categoryId: number
@@ -39,6 +43,17 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  addToCart(productId: number): void {
+    if(this.cookieService.get('userId')) {
+      const userId = Number(this.cookieService.get('userId'));
+      this.orderItemService.addOrderItemToOrder(userId, productId).subscribe(
+        // {complete: () => {
+        //   this.sharedService.emitChange({cart: true});
+        // }}
+      )
+    }
   }
 
 }

@@ -11,6 +11,7 @@ import { CartComponent } from './cart/cart.component';
 import { ProductComponent } from './product/product.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { SharedService } from './service/shared-service';
+import { CookieService } from 'ngx-cookie-service';
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
@@ -28,7 +29,10 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     AppRoutingModule,
     NgxMaskModule.forRoot()
   ],
-  providers: [SharedService],
+  providers: [
+    SharedService, 
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
