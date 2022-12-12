@@ -1,14 +1,16 @@
 <div class="wrapper">
-    <div class="cart-item-container">
+    <h1 *ngIf="products.length <= 0" style="color: #4CAF50;">Your cart is empty</h1>
+    <div *ngIf="products.length > 0" class="cart-item-container">
         <div *ngFor="let product of products; index as i" class="product-card">
             <div class="card-row">
                 <div>
                     <h1 style="color: black">{{product.name}}</h1>
                     <h2>{{product.price}} $</h2>
                 </div>
-                <button class="delete-order-item-btn" (click)="removeOrderItem(orderItems[i].orderItemId!)">Remove</button>
+                <button class="delete-order-item-btn" (click)="removeOrderItem(orderItems[i].orderItemId!, i)">Remove</button>
             </div>
         </div>
+        <button class="go-to-details-btn" [routerLink]="['/payment']">Go to payment</button>
     </div>
     
 </div>

@@ -12,6 +12,8 @@ import { ProductComponent } from './product/product.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { SharedService } from './service/shared-service';
 import { CookieService } from 'ngx-cookie-service';
+import { HistoryComponent } from './history/history.component';
+import { PaymentComponent } from './payment/payment.component';
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
@@ -20,7 +22,9 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     RegisterComponent,
     LoginComponent,
     CartComponent,
-    ProductComponent
+    ProductComponent,
+    HistoryComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

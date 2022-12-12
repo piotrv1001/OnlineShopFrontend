@@ -22,3 +22,18 @@
 .delete-order-item-btn:hover {
     background-color: red;
 }
+
+.go-to-details-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.go-to-details-btn:hover {
+    background-color: #45a049;
+}

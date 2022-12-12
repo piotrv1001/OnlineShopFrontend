@@ -12,11 +12,7 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  addOrder(order: Order): Observable<any> {
-    return this.http.post<Order>(this.baseUrl, order);
-  }
-
-  updateOrderStatus(orderId: number): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/${orderId}`, null);
+  updateOrder(userId: number, address: string, name: string, phoneNumber: string): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}?userId=${userId}&address=${address}&name=${name}&phoneNumber=${phoneNumber}`, null);
   }
 }
