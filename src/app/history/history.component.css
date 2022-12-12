@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.history-item-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 75%;
+}

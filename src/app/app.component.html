@@ -6,7 +6,8 @@
         <button class="nav-btn" (click)="onCategorySelected(4)">Birds</button>
     </div>
     <div class="right-nav">
-        <button class="nav-btn" routerLink="cart">Cart</button>
+        <button *ngIf="isAuthenticated" class="nav-btn" routerLink="history">History</button>
+        <button *ngIf="isAuthenticated" class="nav-btn" routerLink="cart">Cart</button>
         <button *ngIf="!isAuthenticated" class="nav-btn" routerLink="register">Register</button>
         <button *ngIf="!isAuthenticated"  class="nav-btn" routerLink="login">Login</button>
         <button *ngIf="isAuthenticated"  class="nav-btn" (click)="logout()">Logout</button>

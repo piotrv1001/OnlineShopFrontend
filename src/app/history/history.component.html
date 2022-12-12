@@ -1,1 +1,14 @@
-<p>history works!</p>
+<div class="wrapper">
+    <h1 *ngIf="orderHistoryItems.length <= 0" style="color: #4CAF50;">Your order history is empty</h1>
+    <div *ngIf="orderHistoryItems.length > 0" class="history-item-container">
+        <div *ngFor="let order of grouppedItems; index as i">
+            <h1 style="color: #4CAF50; margin-bottom: 40px;">Order nr {{i + 1}}</h1>
+            <div *ngFor="let orderItem of order">
+                <h1 style="color: black">{{orderItem.name}}</h1>
+                <h2>{{orderItem.price}} $</h2>
+                <h2>Amount: {{orderItem.amount}}</h2>
+            </div>
+            <hr style="margin: 10px 0">
+        </div>
+    </div>
+</div>

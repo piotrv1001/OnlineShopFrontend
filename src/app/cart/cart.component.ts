@@ -43,6 +43,15 @@ export class CartComponent implements OnInit {
     }
   }
 
+  updateOrderItemAmount(increment: number, index: number): void {
+    if(increment === 1) {
+      this.orderItems[index].amount++;
+    } else {
+      this.orderItems[index].amount--
+    }
+    this.orderItemService.updateOrderItemAmount(this.orderItems[index].orderItemId!, this.orderItems[index].amount).subscribe()
+  }
+
   removeOrderItem(orderItemId: number, index: number): void {
     this.orderItemService.deleteOrderItemById(orderItemId).subscribe(
       {next: () => {

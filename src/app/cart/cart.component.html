@@ -7,7 +7,12 @@
                     <h1 style="color: black">{{product.name}}</h1>
                     <h2>{{product.price}} $</h2>
                 </div>
-                <button class="delete-order-item-btn" (click)="removeOrderItem(orderItems[i].orderItemId!, i)">Remove</button>
+                <div class="right-cart">
+                    <button [disabled]="orderItems[i].amount <= 1" class="plus-minus-amount" (click)="updateOrderItemAmount(0, i)">-</button>
+                    <div class="item-amount">{{orderItems[i].amount}}</div>
+                    <button class="plus-minus-amount" (click)="updateOrderItemAmount(1, i)">+</button>
+                    <button class="delete-order-item-btn" (click)="removeOrderItem(orderItems[i].orderItemId!, i)">Remove</button>
+                </div>
             </div>
         </div>
         <button class="go-to-details-btn" [routerLink]="['/payment']">Go to payment</button>
