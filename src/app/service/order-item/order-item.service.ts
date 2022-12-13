@@ -16,6 +16,10 @@ export class OrderItemService {
     return this.http.get<OrderItem[]>(`${this.baseUrl}?userId=${userId}`);
   }
 
+  getOrderItemCountByUserId(userId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}?userId=${userId}&count=true`, {responseType: 'text'});
+  }
+
   addOrderItemToOrder(userId: number, productId: number): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}?userId=${userId}&productId=${productId}`, null);
   }

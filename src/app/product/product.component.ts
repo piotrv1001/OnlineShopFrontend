@@ -89,9 +89,9 @@ export class ProductComponent implements OnInit {
     if(this.cookieService.get('userId')) {
       const userId = Number(this.cookieService.get('userId'));
       this.orderItemService.addOrderItemToOrder(userId, productId).subscribe(
-        // {complete: () => {
-        //   this.sharedService.emitChange({cart: true});
-        // }}
+        {complete: () => {
+          this.sharedService.updateCartItemCount();
+        }}
       )
     }
   }

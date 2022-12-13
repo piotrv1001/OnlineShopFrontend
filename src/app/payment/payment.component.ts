@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../model/user';
 import { OrderService } from '../service/order/order.service';
+import { SharedService } from '../service/shared-service';
 import { UserService } from '../service/user/user.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class PaymentComponent implements OnInit {
     private userService: UserService,
     private orderService: OrderService,
     private cookieService: CookieService,
+    private sharedService: SharedService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class PaymentComponent implements OnInit {
       this.phoneNumber
     ).subscribe(
       {next: () => {
+        this.sharedService.updateCartItemCount();
         this.router.navigate(['/']);
       }}
     )

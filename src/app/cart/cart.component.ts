@@ -4,6 +4,7 @@ import { OrderItem } from '../model/order-item';
 import { Product } from '../model/product';
 import { OrderItemService } from '../service/order-item/order-item.service';
 import { ProductService } from '../service/product/product.service';
+import { SharedService } from '../service/shared-service';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +19,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private orderItemService: OrderItemService,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.loadOrderItems();
@@ -57,6 +59,7 @@ export class CartComponent implements OnInit {
       {next: () => {
         this.products.splice(index, 1);
         this.loadOrderItems();
+        this.sharedService.updateCartItemCount();
       }}
     )
   }
