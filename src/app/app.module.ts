@@ -14,6 +14,7 @@ import { SharedService } from './service/shared-service';
 import { CookieService } from 'ngx-cookie-service';
 import { HistoryComponent } from './history/history.component';
 import { PaymentComponent } from './payment/payment.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
@@ -24,7 +25,8 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     CartComponent,
     ProductComponent,
     HistoryComponent,
-    PaymentComponent
+    PaymentComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

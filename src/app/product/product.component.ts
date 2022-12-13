@@ -14,6 +14,8 @@ import { SharedService } from '../service/shared-service';
 export class ProductComponent implements OnInit {
 
   products: Product[] = [];
+  isAdmin = false;
+  categoryId: number = 0
 
   constructor(
     private router: Router,
@@ -26,9 +28,11 @@ export class ProductComponent implements OnInit {
         categoryId: number
       };
       if(state.categoryId !== undefined) {
+        this.categoryId = state.categoryId;
         this.loadData(state.categoryId);
       } 
       this.sharedService.changeEmitted$.subscribe(categoryId => {
+        this.categoryId = categoryId;
         this.loadData(categoryId);
       });
   }
@@ -42,7 +46,28 @@ export class ProductComponent implements OnInit {
     )
   }
 
+  goToAddProduct(): void {
+    this.router.navigate(['add-product'], {state: {categoryId: this.categoryId}});
+  }
+
+  goToEditProduct(index: number): void {
+    this.router.navigate(['add-product'], {state: {categoryId: this.categoryId, productId: this.products[index].productId}});
+  }
+
+  removeProduct(index: number): void {
+    if(confirm('Are you sure you want to delete ' + this.products[index].name)) {
+      this.productService.deleteProductById(this.products[index].productId!).subscribe(
+        {complete: () => {
+          this.products.splice(index, 1);
+        }}
+      )
+    }    
+  }
+
   ngOnInit(): void {
+    if(this.cookieService.get('admin')) {
+      this.isAdmin = true;
+    }
   }
 
   addToCart(productId: number): void {

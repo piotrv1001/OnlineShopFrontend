@@ -1,7 +1,10 @@
+<button *ngIf="isAdmin" (click)="goToAddProduct()">Add new product</button>
 <div class="product-parent">
-    <div *ngFor="let product of products" class="product-card">
+    <div *ngFor="let product of products; index as i" class="product-card">
         <h1 style="color: black">{{product.name}}</h1>
         <h2>{{product.price}} $</h2>
-        <button class="add-to-cart-btn"(click)="addToCart(product.productId!)">Add to cart</button>
+        <button *ngIf="!isAdmin" class="add-to-cart-btn"(click)="addToCart(product.productId!)">Add to cart</button>
+        <button *ngIf="isAdmin" class="edit-product-btn" (click)="goToEditProduct(i)">Edit</button>
+        <button *ngIf="isAdmin" class="remove-product-btn" (click)="removeProduct(i)">Remove</button>
     </div>
 </div>

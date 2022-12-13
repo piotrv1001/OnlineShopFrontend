@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from './service/shared-service';
-import { UserService } from './service/user/user.service';
+import { AdminInfo, UserService } from './service/user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +25,11 @@ export class AppComponent implements OnInit {
 
   private authenticate(): void {
     this.userService.authenticate().subscribe(
-      {complete: () => {
+      {next: (adminInfo: AdminInfo) => {
         this.isAuthenticated = true;
+        if(adminInfo['admin']) {
+          this.cookieService.set('admin', '1');
+        }
       }
     });
   }
@@ -45,6 +48,7 @@ export class AppComponent implements OnInit {
         this.router.navigate(['login']);
         this.isAuthenticated = false;
         this.cookieService.delete('userId');
+        this.cookieService.delete('admin');
       }}
     )
   }

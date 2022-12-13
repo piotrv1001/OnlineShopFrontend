@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
 
+export interface AdminInfo {
+  admin: boolean
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +36,7 @@ export class UserService {
     return this.http.get<any>('/logout');
   }
 
-  authenticate(): Observable<any> {
-    return this.http.get('/authenticate');
+  authenticate(): Observable<AdminInfo> {
+    return this.http.get<AdminInfo>('/authenticate');
   }
 }
