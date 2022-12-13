@@ -1,6 +1,12 @@
 <button *ngIf="isAdmin" (click)="goToAddProduct()">Add new product</button>
+<h3 *ngIf="showCannotRemoveError" style="color: red;">Cannot remove product! There are orders that contain the product</h3>
+<input type="text"
+        [(ngModel)]="searchedProducts"
+        (ngModelChange)="filterProducts()"
+        placeholder="Search..."
+        style="padding: 10px; margin: 10px;"/>
 <div class="product-parent">
-    <div *ngFor="let product of products; index as i" class="product-card">
+    <div *ngFor="let product of filteredProducts; index as i" class="product-card">
         <h1 style="color: black">{{product.name}}</h1>
         <h2>{{product.price}} $</h2>
         <button *ngIf="!isAdmin" class="add-to-cart-btn"(click)="addToCart(product.productId!)">Add to cart</button>

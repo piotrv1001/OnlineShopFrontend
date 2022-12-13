@@ -33,7 +33,7 @@ export class ProductService {
   }
 
   deleteProductById(productId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${productId}`);
+    return this.http.delete(`${this.baseUrl}/${productId}`, {observe: 'response'});
   }
 
   updateProduct(product: Product): Observable<any> {

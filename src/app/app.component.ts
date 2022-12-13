@@ -12,6 +12,7 @@ import { AdminInfo, UserService } from './service/user/user.service';
 export class AppComponent implements OnInit {
 
   isAuthenticated: boolean = false;
+  isAdmin = false;
 
   constructor(
     private router: Router,
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
         this.isAuthenticated = true;
         if(adminInfo['admin']) {
           this.cookieService.set('admin', '1');
+          this.isAdmin = true;
         }
       }
     });
@@ -47,6 +49,7 @@ export class AppComponent implements OnInit {
       {complete: () => {
         this.router.navigate(['login']);
         this.isAuthenticated = false;
+        this.isAdmin = false;
         this.cookieService.delete('userId');
         this.cookieService.delete('admin');
       }}

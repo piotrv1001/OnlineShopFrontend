@@ -15,7 +15,10 @@ export class ProductComponent implements OnInit {
 
   products: Product[] = [];
   isAdmin = false;
-  categoryId: number = 0
+  categoryId: number = 0;
+  showCannotRemoveError: boolean = false;
+  searchedProducts: string = '';
+  filteredProducts: Product[] = [];
 
   constructor(
     private router: Router,
@@ -38,10 +41,12 @@ export class ProductComponent implements OnInit {
   }
 
   private loadData(categoryId: number): void {
+    this.showCannotRemoveError = false;
     this.products = [];
     this.productService.getProductsByCategoryId(categoryId).subscribe(
       {next: (products) => {
         this.products = products;
+        this.filteredProducts = products;
       }}
     )
   }
@@ -54,11 +59,21 @@ export class ProductComponent implements OnInit {
     this.router.navigate(['add-product'], {state: {categoryId: this.categoryId, productId: this.products[index].productId}});
   }
 
+  filterProducts(): void {
+      this.filteredProducts = this.products.filter(product => 
+        product.name.toLowerCase().startsWith(this.searchedProducts.toLowerCase())
+         || product.name.toLowerCase().endsWith(this.searchedProducts.toLowerCase()));
+  }
+
   removeProduct(index: number): void {
     if(confirm('Are you sure you want to delete ' + this.products[index].name)) {
-      this.productService.deleteProductById(this.products[index].productId!).subscribe(
-        {complete: () => {
+      this.productService.deleteProductById(this.products[index].productId!).subscribe(     
+        {next: () => {
           this.products.splice(index, 1);
+          this.showCannotRemoveError = false;
+        },
+        error: () => {
+          this.showCannotRemoveError = true;
         }}
       )
     }    
