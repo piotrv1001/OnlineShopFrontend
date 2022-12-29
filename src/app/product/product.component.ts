@@ -19,7 +19,9 @@ export class ProductComponent implements OnInit {
   showCannotRemoveError: boolean = false;
   searchedProducts: string = '';
   filteredProducts: Product[] = [];
+  isLoggedIn = false;
 
+  // random comment
   constructor(
     private router: Router,
     private productService: ProductService,
@@ -33,7 +35,7 @@ export class ProductComponent implements OnInit {
       if(state.categoryId !== undefined) {
         this.categoryId = state.categoryId;
         this.loadData(state.categoryId);
-      } 
+      }
       this.sharedService.changeEmitted$.subscribe(categoryId => {
         this.categoryId = categoryId;
         this.loadData(categoryId);
@@ -60,14 +62,14 @@ export class ProductComponent implements OnInit {
   }
 
   filterProducts(): void {
-      this.filteredProducts = this.products.filter(product => 
+      this.filteredProducts = this.products.filter(product =>
         product.name.toLowerCase().startsWith(this.searchedProducts.toLowerCase())
          || product.name.toLowerCase().endsWith(this.searchedProducts.toLowerCase()));
   }
 
   removeProduct(index: number): void {
     if(confirm('Are you sure you want to delete ' + this.products[index].name)) {
-      this.productService.deleteProductById(this.products[index].productId!).subscribe(     
+      this.productService.deleteProductById(this.products[index].productId!).subscribe(
         {next: () => {
           this.products.splice(index, 1);
           this.showCannotRemoveError = false;
@@ -76,12 +78,15 @@ export class ProductComponent implements OnInit {
           this.showCannotRemoveError = true;
         }}
       )
-    }    
+    }
   }
 
   ngOnInit(): void {
     if(this.cookieService.get('admin')) {
       this.isAdmin = true;
+    }
+    if(this.cookieService.get('userId')) {
+      this.isLoggedIn = true;
     }
   }
 
